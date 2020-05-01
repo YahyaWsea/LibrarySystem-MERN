@@ -1,0 +1,25 @@
+{
+  "name": "LibrarySystem-MERN",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start":"PORT=8888 nodemon ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/YahyaWsea/LibrarySystem-MERN.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/YahyaWsea/LibrarySystem-MERN/issues"
+  },
+  "homepage": "https://github.com/YahyaWsea/LibrarySystem-MERN#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^5.9.11"
+  }
+}
