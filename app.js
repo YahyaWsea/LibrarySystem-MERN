@@ -2,11 +2,21 @@ const express = require('express');
 const mongoose = require('mongoose');
 const config = require('config');
 
+
+
+const books = require('./routes/books');
+const categories = require('./routes/categories');
 const User = require('./models/User');
 
 
 const app = express();
-const PORT = process.env.PORT || 9999;
+
+app.use(express.json());
+app.use('/books', books);
+app.use('/categories', categories);
+
+
+const PORT =  8888;
 
 
 
