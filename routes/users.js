@@ -16,8 +16,10 @@ userRouter.get('/', (req, res) => {
 
 userRouter.get('/:id', (req, res) => {
     User.findOne({ "_id": req.params.id })
-        .populate('posts')
         .then((user) => {
+            if (!user) {
+                return res.status(404).send('This user is not found.');
+            }
             res.send(user);
         })
         .catch(err => { console.log(err) });
@@ -28,6 +30,18 @@ userRouter.get('/:id', (req, res) => {
 userRouter.post('/register', (req, res) => {
 
     let { username, email, password } = req.body;
+    // Validation
+    if (!username || !email || !password) {
+        return res.status(404).send('Please enter all fields.');
+    }
+
+
+    // Email Existence
+    User.findOne({ email })
+        .then(user => {
+            if (user) return res.status(404).send('This user exists already.');
+        })
+
     const newUser = new User({
         username,
         email,
@@ -52,6 +66,9 @@ userRouter.patch('/:id', (req, res) => {
 
     User.findById(req.params.id, (err, user) => {
         // if (err) return false;
+        if (!user) {
+            return res.status(404).send('This user is not found.');
+        }
         user.password = password;
         user.username = username;
         user.email = email;
@@ -64,8 +81,12 @@ userRouter.patch('/:id', (req, res) => {
 })
 
 userRouter.delete('/:id', (req, res) => {
+
     User.deleteOne({ "_id": req.params.id })
         .then((user) => {
+            if (!user) {
+                return res.status(404).send('This user is not found.');
+            }
             res.send(user);
         })
         .catch(err => console.log(err));
