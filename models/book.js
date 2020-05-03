@@ -1,5 +1,5 @@
-const mongoose = require('mongoose')
-const categorySchema = require('./category')
+const mongoose = require('mongoose');
+const categorySchema = require('./category');
 
 const bookSchema = new mongoose.Schema({
     title: {
@@ -30,18 +30,9 @@ const bookSchema = new mongoose.Schema({
         required: true,
         min: 0,
         max: 255
-    },
-    available: {
-        type: Number,
-        default: this.quantity
-        // validate: [
-        //     function (value) {
-        //         return this.quantity = value;
-        //     }
-        // ]
     }
 })
 
-const Book = new mongoose.model('Book', bookSchema)
+const Book = new mongoose.model('book', bookSchema);
 
 exports.Book = Book;

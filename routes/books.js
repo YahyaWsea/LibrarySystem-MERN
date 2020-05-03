@@ -1,14 +1,15 @@
-const express = require('express');
-const mongoose = require('mongoose');
+
 const { Category } = require('../models/category');
-const Book = require('../models/book');
+const mongoose = require('mongoose');
+const express = require('express');
+const { Book } = require('../models/book');
 
 const router = express.Router();
 
 router.get('/', async (req, res) => {
     try {
         const books = await Book.find({});
-        res.send(books)
+        res.send(books);
     } catch (e) {
         res.status(500).send()
     }
@@ -21,30 +22,26 @@ router.post('/', async (req, res) => {
     try {
         const category = await Category.findById(req.body.categoryId)
         if (!category) {
-            res.status(400).send('Invalid Category')
+            res.status(400).send('Invalid Category');
+            return;
         }
-        console.log('category', category);
 
 
-        const book = new Book({
+        let book = new Book({
             title: req.body.title,
             author: req.body.author,
-            // category: {
-            //     _id: category._id,
-            //     title: category.title
-            // },
+            category: category,
             price: req.body.price,
             quantity: req.body.quantity
+        });
 
-        })
 
-        console.log('book', book);
-
-        // await book.save();
-
+        await book.save();
         res.send(book);
 
+
     } catch (e) {
+        console.log(e);
         res.status(500).send();
     }
 })
@@ -60,10 +57,7 @@ router.patch('/:id', async (req, res) => {
         {
             title: req.body.title,
             author: req.body.author,
-            category: {
-                _id: category._id,
-                title: category.title
-            },
+            category: category,
             price: req.body.price,
             quantity: req.body.quantity
         }, { new: true });
