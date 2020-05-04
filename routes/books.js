@@ -1,6 +1,5 @@
 
 const { Category } = require('../models/category');
-const mongoose = require('mongoose');
 const express = require('express');
 const { Book } = require('../models/book');
 

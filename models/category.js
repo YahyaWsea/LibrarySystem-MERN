@@ -1,4 +1,5 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
+const bookSchema = require('./book');
 
 const categorySchema = new mongoose.Schema({
     title: {
@@ -6,7 +7,11 @@ const categorySchema = new mongoose.Schema({
         required: true,
         minlength: 5,
         maxlength: 50
-    }
+    },
+    books: [{
+        // type: mongoose.Schema.Types.ObjectId,
+        // ref: 'book'
+    }]
 })
 
 const Category = new mongoose.model('category', categorySchema);

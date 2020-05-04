@@ -14,6 +14,8 @@ const app = express();
 app.use(express.json());
 app.use('/books', books);
 app.use('/categories', categories);
+app.use('/users', require('./routes/users'));
+app.use('/rate', require('./routes/rates'));
 
 
 const PORT =  8888;
@@ -21,7 +23,6 @@ const PORT =  8888;
 
 
 app.use(express.json());
-app.use('/users', require('./routes/users'))
 // app.post('/users', (req, res) => {
 //     const newUser = new User(req.body);
 

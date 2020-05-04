@@ -21,8 +21,8 @@ const bookSchema = new mongoose.Schema({
     price: {
         type: Number,
         required: true,
-        min: 0,
-        max: 255
+        // min: 0,
+        // max: 255
 
     },
     quantity: {
@@ -35,4 +35,5 @@ const bookSchema = new mongoose.Schema({
 
 const Book = new mongoose.model('book', bookSchema);
 
+exports.bookSchema = bookSchema;
 exports.Book = Book;
